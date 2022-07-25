@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-image: url(../img/fondojuego.webp);
+    background-size: 100% 660px;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+.cuadroparadinero {
+    background-image: url(../img/cuadroparadinero.jpg);
+    background-size: 200px 100px;
+    background-repeat: no-repeat;
+    background-position-x: 550px;
+}
+
+.flex {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+.bambu {
+    display: flex;
+    width: 50px;
+    height: 50px;
+}
+
+.moneda {
+    padding: 10px 10px;
+}
+
+.tiempodeldinero {
+    width: 50px;
+    height: 50px;
+}
+
+#principal {
+    grid-area: main;
+}
+
+#pie {
+    grid-area: footer;
+}
+
+@media only screen and (min-width: 1024px) {
+    .grid-index {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 80vh 20vh;
+        grid-template-areas: "main" "footer";
+    }
+}
