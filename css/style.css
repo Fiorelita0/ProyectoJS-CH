@@ -4,17 +4,16 @@
 }
 
 body {
-    background-image: url(../img/fondojuego.webp);
+    background-image: url(../img/fondoparajuego.png);
     background-size: 100% 660px;
     background-repeat: no-repeat;
     overflow-x: hidden;
 }
 
-.cuadroparadinero {
-    background-image: url(../img/cuadroparadinero.jpg);
-    background-size: 200px 100px;
+.cuadroparacartas {
+    background-image: url(../img/bambu.png);
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position-x: 550px;
 }
 
 .flex {
@@ -23,19 +22,34 @@ body {
     justify-content: flex-start;
 }
 
+.block {
+    display: block;
+}
+
 .bambu {
-    display: flex;
-    width: 50px;
-    height: 50px;
+    padding: 10px 25px 0 50px;
+    width: 60px;
+    height: 60px;
+}
+
+.vidas {
+    padding: 10px 25px 0 50px;
+    width: 60px;
+    height: 60px;
+}
+
+.cantdevidas {
+    padding: 27px 0px;
 }
 
 .moneda {
-    padding: 10px 10px;
+    padding: 27px 0px;
 }
 
 .tiempodeldinero {
-    width: 50px;
-    height: 50px;
+    margin: 3px 0px 0px 70px;
+    width: 80px;
+    height: 80px;
 }
 
 #principal {
@@ -50,7 +64,7 @@ body {
     .grid-index {
         display: grid;
         grid-template-columns: auto;
-        grid-template-rows: 80vh 20vh;
+        grid-template-rows: 75vh 25vh;
         grid-template-areas: "main" "footer";
     }
 }
