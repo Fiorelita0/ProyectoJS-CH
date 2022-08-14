@@ -5,27 +5,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Panda war</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
+<body class="bodyindex">
     <main class="flex">
         <div class="flex">
             <img class="bambu" src="./img/bambu.webp" alt="Foto de bambu">
-            <h2 class="moneda">100</h2>
+            <h2>
+                <span id="bambu100"></span>
+            </h2>
         </div>
         <div class="flex">
             <img class="vidas" src="./img/corazon.png" alt="Vidas">
-            <h2 class="cantdevidas">100</h2>
+            <h2>
+                <span id="vida100"></span>
+            </h2>
         </div>
         <div class="flex">
-            <img class="tiempodeldinero" src="./img/reloj.webp" alt="Foto del reloj">
-
+            <img class="tiempodeldinero" src="./img/57-PM-unscreen.gif" alt="Foto del reloj">
+            <h2>
+                <span id="tiempo"></span>
+            </h2>
+        </div>
+        <div class="usuario">
+            <h2>Hola,
+                <span id="usuario">Usuario</span>
+            </h2>
+        </div>
+        <div class="flex opciones">
+            <select name="fondo" id="fondo" class="btn-opciones">
+            <option id="btn1" value="tierra">Tierra</option>
+            <option id="btn2" value="agua">Agua</option>
+            <option id="btn3" value="fuego">Fuego</option>
+        </select>
+        </div>
+        <div>
+            <img id="ingresar" class="ingreso" src="./img/logo-removebg-preview.png" alt="Logo para iniciar sesion">
         </div>
     </main>
+    <div>
+        <span id="tiempos"></span>
+        <div class="pandaPersonaje" id="pandaPersonaje"></div>
+    </div>
+    <section class="modal"></section>
 
     <script src="./js/main.js"></script>
+
 </body>
 
 </html>

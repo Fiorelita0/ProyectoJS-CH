@@ -1,0 +1,164 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.bodyindex {
+    background-image: url('../img/fondodetierra.webp');
+    background-size: 100% 660px;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+.cuadroparadinero {
+    background-image: url(../img/cuadroparadinero.jpg);
+    background-size: 200px 100px;
+    background-repeat: no-repeat;
+    background-position-x: 550px;
+}
+
+.block {
+    display: block;
+}
+
+.flex {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.bambu {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    padding: 10px 0 0 15px;
+}
+
+#bambu100 {
+    padding: 18px 15px;
+    font-size: 2.3rem;
+    color: black;
+    position: absolute;
+}
+
+.vidas {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    padding: 10px 0 0 15px;
+}
+
+#vida100 {
+    padding: 18px 15px;
+    font-size: 2.3rem;
+    color: black;
+    position: absolute;
+}
+
+.tiempodeldinero {
+    display: flex;
+    width: 75px;
+    height: 75px;
+    padding: 4px 0 0 50px;
+}
+
+.usuario {
+    margin: 26px 30px 10px 630px
+}
+
+.opciones {
+    margin: 25px 0px 10px 0px;
+}
+
+.btn-opciones {
+    width: 85px;
+    height: 35px;
+    font-size: 1.2rem;
+    background-color: rgb(124, 142, 145);
+}
+
+.pandaPersonaje {
+    background-image: url(../img/panda1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 165px;
+    height: 140px;
+    margin: 415px 0px;
+}
+
+.balaBambu {
+    width: 50px;
+    height: 155px;
+    background-image: url(../img/bala-removebg-preview.png);
+    background-size: 80px 70px;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.enemigoHongo {
+    width: 95px;
+    height: 160px;
+    background-image: url(../img/hongoenemigo.png);
+    background-size: 100px 90px;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.ingreso {
+    display: block;
+    width: 50px;
+    height: 50px;
+    padding: 15px 0 0 15px;
+}
+
+
+/*Ingresohtml*/
+
+
+/*Animacion*/
+
+@keyframes animacionpandas {
+    0% {
+        background-image: url(../img/bgpanda1.jpg);
+    }
+    20% {
+        background-image: url(../img/bgpanda2.jpg);
+    }
+    40% {
+        background-image: url(../img/bgpanda3.jpg);
+    }
+    80% {
+        background-image: url(../img/bgpanda4.png);
+    }
+    100% {
+        background-image: url(../img/bgpanda5.jpg);
+    }
+}
+
+.bodyingreso {
+    background-repeat: no-repeat;
+    background-size: 100% 650px;
+    animation-name: animacionpandas;
+    animation-iteration-count: infinite;
+    animation-duration: 7s;
+}
+
+.bg-blanco {
+    width: 320px;
+    height: 360px;
+    background-color: white;
+    background-size: 500px 500px;
+    background-position-x: center;
+    margin: 4% 36%;
+}
+
+form h1 {
+    font-size: 2rem;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+form label {
+    display: block;
+    padding: 4px 75px;
+}
