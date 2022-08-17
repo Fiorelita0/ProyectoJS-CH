@@ -9,22 +9,22 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body class="bodyindex">
+<body onload="cargarPagina()" class="bodyindex">
     <main class="flex">
         <div class="flex">
             <img class="bambu" src="./img/bambu.webp" alt="Foto de bambu">
             <h2>
-                <span id="bambu100"></span>
+                <span id="bambu100">100</span>
             </h2>
         </div>
         <div class="flex">
             <img class="vidas" src="./img/corazon.png" alt="Vidas">
             <h2>
-                <span id="vida100"></span>
+                <span id="vida100">100</span>
             </h2>
         </div>
         <div class="flex">
-            <img class="tiempodeldinero" src="./img/57-PM-unscreen.gif" alt="Foto del reloj">
+            <img class="tiempoReloj" src="./img/57-PM-unscreen.gif" alt="Foto del reloj">
             <h2>
                 <span id="tiempo"></span>
             </h2>
@@ -42,14 +42,39 @@
         </select>
         </div>
         <div>
-            <img id="ingresar" class="ingreso" src="./img/logo-removebg-preview.png" alt="Logo para iniciar sesion">
+            <img class="ingreso" src="./img/logo-removebg-preview.png" alt="Logo para iniciar sesion">
         </div>
     </main>
-    <div>
-        <span id="tiempos"></span>
-        <div class="pandaPersonaje" id="pandaPersonaje"></div>
-    </div>
-    <section class="modal"></section>
+    <section>
+        <div>
+            <span id="tiempos"></span>
+            <div class="pandaPersonaje" id="pandaPersonaje"></div>
+        </div>
+    </section>
+    <section class="modal">
+        <div class="modal_container">
+            <form>
+                <h1 class="modal_titulo">Iniciar Sesion</h1>
+                <div class="block">
+                    <label for="email">Direccion de correo</label>
+                    <input type="email" id="email" placeholder="nombre@gmail.com">
+                </div>
+                <div class="block">
+                    <label for="contrasenia">Contraseña</label>
+                    <input type="contrasenia" id="contrasenia" placeholder="Contraseña">
+                </div>
+                <div class="flex">
+                    <input type="checkbox" id="recordar" value="checkbox" class="input_recordar">
+                    <label for="checkbox" class="label_recordar">Recordarme mis datos</label>
+                </div>
+                <div class="block">
+                    <button id="btnSesion" type="button" class="block modal_ingresar">Ingresar para jugar</button>
+                    <button id="btnEliminar" type="button" class="block modal_eliminar">Eliminar todos mis datos</button>
+                </div>
+            </form>
+
+        </div>
+    </section>
 
     <script src="./js/main.js"></script>
 
