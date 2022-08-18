@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Panda war</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body onload="cargarPagina()" class="bodyindex">
-    <main class="flex">
+<body class="bodyindex">
+    <main id="main" class="flex">
         <div class="flex">
             <img class="bambu" src="./img/bambu.webp" alt="Foto de bambu">
             <h2>
-                <span id="bambu100">100</span>
+                <span id="bambu100">0</span>
             </h2>
         </div>
         <div class="flex">
@@ -42,7 +43,7 @@
         </select>
         </div>
         <div>
-            <img class="ingreso" src="./img/logo-removebg-preview.png" alt="Logo para iniciar sesion">
+            <img id="ingreso" class="ingreso" src="./img/logo-removebg-preview.png" alt="Logo para iniciar sesion">
         </div>
     </main>
     <section>
@@ -75,8 +76,11 @@
 
         </div>
     </section>
-
     <script src="./js/main.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <!-- SweetAlert script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
