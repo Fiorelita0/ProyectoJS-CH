@@ -13,7 +13,7 @@ nuevoUsuario.onclick = () => {
         inputValidator: (nombre) => {
             if (!nombre) {
                 return "Por favor escribe tu nombre";
-            } else if (nombre == ' ', '@') {
+            } else if (nombre == '@') {
                 return "Ingresaste caracteres invalidos";
             } else {
                 return undefined;
