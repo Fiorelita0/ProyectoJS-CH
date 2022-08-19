@@ -6,14 +6,14 @@ nuevoUsuario.onclick = () => {
     Swal.fire({
         title: "Ingresa tu nombre",
         input: "text",
-        inputLabel: 'Tu nombre es:',
+        inputLabel: "Tu nombre es:",
         showCancelButton: true,
         confirmButtonText: "Guardar",
         cancelButtonText: "Cancelar",
         inputValidator: (nombre) => {
             if (!nombre) {
                 return "Por favor escribe tu nombre";
-            } else if (nombre == '@') {
+            } else if (nombre == "@") {
                 return "Ingresaste caracteres invalidos";
             } else {
                 return undefined;
@@ -23,7 +23,7 @@ nuevoUsuario.onclick = () => {
         if (resultado.value) {
             let nombre = resultado.value;
             console.log("Hola, " + nombre);
-            nombreUsuario.innerText = nombre
+            nombreUsuario.innerText = nombre;
         }
     });
 };
@@ -133,7 +133,32 @@ document.addEventListener("click", () => {
         pandaPersonaje.getBoundingClientRect().left + 45 + "px";
     body.append(balaBambu);
 });
-//crear array de pandas
+
+//Funcion constructora
+//Objetos
+class Personajes {
+    constructor(nombre, vida, puntos, danio) {
+        this.nombre = nombre.toUpperCase();
+        this.vida = vida;
+        this.puntosObtenidos = puntos;
+        this.puntosDanio = danio;
+        this.utilizado = false;
+    }
+    mensaje() {
+        this.hablar = console.log("Hola soy un " + this.nombre);
+    }
+    utilizar() {
+        this.utilizado = true;
+    }
+}
+//Array de los Personajes
+const personaje = [];
+personaje.push(new Personajes("Panda de tierra", 100, 100, 25));
+personaje.push(new Personajes("Panda de agua", 100, 300, 50));
+personaje.push(new Personajes("Panda de fuego", 100, 500, 100));
+
+
+//Crear array de las imagenes del panda
 const arrayPandas = new Array();
 arrayPandas[0] = "img/pandadetierra.png";
 arrayPandas[1] = "img/pandadeagua.png";
@@ -156,19 +181,16 @@ setInterval(() => {
         //Detectar y eliminar enemigos
         let enemigosHongos = document.querySelectorAll(".enemigoHongo");
         enemigosHongos.forEach((enemigoHongo) => {
-            if (
-                balaBambu.getBoundingClientRect().top <=
-                enemigoHongo.getBoundingClientRect().top + 50
-            ) {
-                if (
-                    balaBambu.getBoundingClientRect().left >=
+            if (balaBambu.getBoundingClientRect().top <=
+                enemigoHongo.getBoundingClientRect().top + 50) {
+                if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
-                    enemigoHongo.getBoundingClientRect().left + 95
-                ) {
+                    enemigoHongo.getBoundingClientRect().left + 95) {
                     bambu += 25;
                     bambu100.innerHTML = bambu;
                     //Desbloqueo de pandas
+                    //Al lograr 300 puntos se desbloquea el panda de agua
                     if (bambu == 25) {
                         console.log("Desbloqueo del Panda de agua");
                         //crear un boton para vestuario de agua
@@ -178,15 +200,18 @@ setInterval(() => {
                         button.id = "agua";
                         button.classList.add("btnpandadeagua");
                         main.appendChild(button);
+                        //al hacer click aparece el panda de agua
                         let agua = document.getElementById("agua");
                         agua.addEventListener("click", () => {
                             urlPersonaje = arrayPandas[1];
                             console.log(urlPersonaje);
-                            document.querySelector(
-                                ".pandaPersonaje"
-                            ).style.backgroundImage = `url('${urlPersonaje}')`;
+                            document.querySelector(".pandaPersonaje").style.backgroundImage = `url('${urlPersonaje}')`;
+                            console.log(personaje[1]);
+                            personaje[1].mensaje();
+                            personaje[1].utilizar();
                         });
-                    } else if (bambu == 50) {
+                    } //Al lograr 500 puntos se desbloquea el panda de agua
+                    else if (bambu == 50) {
                         console.log("Desbloqueo del Panda de fuego");
                         //crear un boton para vestuario de fuego
                         let main = document.getElementById("main");
@@ -195,17 +220,18 @@ setInterval(() => {
                         button.id = "fuego";
                         button.classList.add("btnpandadefuego");
                         main.appendChild(button);
+                        //al hacer click aparece el panda de fuego
                         let fuego = document.getElementById("fuego");
                         fuego.addEventListener("click", () => {
                             urlPersonaje = arrayPandas[2];
                             console.log(urlPersonaje);
-                            document.querySelector(
-                                ".pandaPersonaje"
-                            ).style.backgroundImage = `url('${urlPersonaje}')`;
+                            document.querySelector(".pandaPersonaje").style.backgroundImage = `url('${urlPersonaje}')`;
                         });
-                    } else if (bambu == 1000) {
-                        console.log("Game Over");
+                    } //Al lograr 1000 puntos ganas el juego
+                    else if (bambu == 1000) {
+                        console.log("Ganaste");
                     }
+                    //Elimina el enemigoHongo al tocar la balaBambu
                     setTimeout(() => {
                         enemigoHongo.remove();
                     }, 50);
@@ -214,48 +240,5 @@ setInterval(() => {
         });
     });
 }, 100);
-
-//funcion constructora
-//objetos
-class Personajes {
-    constructor(nombre, vida, puntos) {
-        this.nombre = nombre.toUpperCase();
-        this.vida = vida;
-        this.puntos = puntos;
-    }
-    mensaje() {
-        this.hablar = console.log("Hola soy un " + this.nombre);
-    }
-}
-
-const personajes = [];
-personajes.push(new Personajes("Panda de tierra", 100, 50));
-personajes.push(new Personajes("Panda de agua", 100, 300));
-personajes.push(new Personajes("Panda de fuego", 100, 500));
-
-console.log(usuario);
-console.log(personajes);
-for (const personalizados of personajes) personalizados.mensaje();
-
-//Metodos
-const puntosPersonajes = [
-    { id: 1, personaje: "Panda de tierra", puntos: 50 },
-    { id: 2, personaje: "Panda de agua", puntos: 300 },
-    { id: 3, personaje: "Panda de fuego", puntos: 500 },
-];
-const pandadetierra = puntosPersonajes.find(
-    (personaje) => personaje.puntos === 50
-);
-console.log(pandadetierra);
-
-const pandadeagua = puntosPersonajes.find(
-    (personaje) => personaje.puntos === 300
-);
-console.log(pandadeagua);
-
-const pandadefuego = puntosPersonajes.find(
-    (personaje) => personaje.puntos === 500
-);
-console.log(pandadefuego);
 
 //Tiempo
