@@ -30,10 +30,27 @@ nuevoUsuario.onclick = () => {
 
 //DOM y Eventos - cambiar fondo
 let fondo = document.querySelector("#fondo");
+let urlPersonaje = "";
 
 fondo.addEventListener("change", () => {
     console.log(fondo.value);
     document.body.style.backgroundImage = `url('img/fondode${fondo.value}.webp')`;
+    urlPersonaje = arrayPandas[fondo.selectedIndex];
+    console.log(urlPersonaje);
+    document.querySelector('.pandaPersonaje').style.backgroundImage = `url('${urlPersonaje}')`;
+
+    let eleccion = fondo.value;
+    if (eleccion == 'agua') {
+        console.log(personaje[1]);
+        personaje[1].mensaje();
+        personaje[1].utilizar();
+    }
+    if (eleccion == 'fuego') {
+        console.log(personaje[2]);
+        personaje[2].mensaje();
+        personaje[2].utilizar();
+    }
+
 });
 
 //Modal para iniciar sesion y comenzar a jugar
@@ -105,10 +122,8 @@ setInterval(() => {
             enemigoHongo.getBoundingClientRect().top + 10 + "px";
 
         //Desaparicion del hongo y eliminacion de una vida
-        if (
-            enemigoHongo.getBoundingClientRect().top >
-            pandaPersonaje.getBoundingClientRect().top - 25
-        ) {
+        if (enemigoHongo.getBoundingClientRect().top >
+            pandaPersonaje.getBoundingClientRect().top - 25) {
             vida--;
             vida100.innerHTML = vida;
             enemigoHongo.remove();
@@ -129,8 +144,7 @@ document.addEventListener("click", () => {
     let balaBambu = document.createElement("div");
     balaBambu.classList.add("balaBambu");
     balaBambu.style.bottom = 44 + "px";
-    balaBambu.style.left =
-        pandaPersonaje.getBoundingClientRect().left + 45 + "px";
+    balaBambu.style.left = pandaPersonaje.getBoundingClientRect().left + 45 + "px";
     body.append(balaBambu);
 });
 
@@ -168,7 +182,6 @@ arrayPandas[2] = "img/pandadefuego.png";
 let bambu = 0;
 let bambu100 = document.getElementById("bambu100");
 let maxPuntaje = 1000;
-let urlPersonaje = "";
 
 setInterval(() => {
     let balasBambus = document.querySelectorAll(".balaBambu");
@@ -193,40 +206,12 @@ setInterval(() => {
                     //Al lograr 300 puntos se desbloquea el panda de agua
                     if (bambu == 25) {
                         console.log("Desbloqueo del Panda de agua");
-                        //crear un boton para vestuario de agua
-                        let main = document.getElementById("main");
-                        const button = document.createElement("button");
-                        button.type = "button";
-                        button.id = "agua";
-                        button.classList.add("btnpandadeagua");
-                        main.appendChild(button);
-                        //al hacer click aparece el panda de agua
-                        let agua = document.getElementById("agua");
-                        agua.addEventListener("click", () => {
-                            urlPersonaje = arrayPandas[1];
-                            console.log(urlPersonaje);
-                            document.querySelector(".pandaPersonaje").style.backgroundImage = `url('${urlPersonaje}')`;
-                            console.log(personaje[1]);
-                            personaje[1].mensaje();
-                            personaje[1].utilizar();
-                        });
+
                     } //Al lograr 500 puntos se desbloquea el panda de agua
                     else if (bambu == 50) {
                         console.log("Desbloqueo del Panda de fuego");
-                        //crear un boton para vestuario de fuego
-                        let main = document.getElementById("main");
-                        const button = document.createElement("button");
-                        button.type = "button";
-                        button.id = "fuego";
-                        button.classList.add("btnpandadefuego");
-                        main.appendChild(button);
-                        //al hacer click aparece el panda de fuego
-                        let fuego = document.getElementById("fuego");
-                        fuego.addEventListener("click", () => {
-                            urlPersonaje = arrayPandas[2];
-                            console.log(urlPersonaje);
-                            document.querySelector(".pandaPersonaje").style.backgroundImage = `url('${urlPersonaje}')`;
-                        });
+
+
                     } //Al lograr 1000 puntos ganas el juego
                     else if (bambu == 1000) {
                         console.log("Ganaste");
@@ -240,5 +225,7 @@ setInterval(() => {
         });
     });
 }, 100);
+
+
 
 //Tiempo
