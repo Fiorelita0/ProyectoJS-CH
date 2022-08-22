@@ -55,6 +55,27 @@
     position: absolute;
 }
 
+#minutos {
+    padding: 18px 135px;
+    font-size: 2.3rem;
+    color: black;
+    position: absolute;
+}
+
+#segundos {
+    padding: 18px 165px;
+    font-size: 2.3rem;
+    color: black;
+    position: absolute;
+}
+
+#dospuntos {
+    padding: 18px 155px;
+    font-size: 2.3rem;
+    color: black;
+    position: absolute;
+}
+
 .tiempoReloj {
     display: flex;
     width: 75px;
@@ -85,24 +106,6 @@
     width: 165px;
     height: 140px;
     margin: 415px 0px;
-}
-
-.btnpandadetierra {
-    width: 50px;
-    height: 50px;
-    margin: 15px -600px;
-}
-
-.btnpandadeagua {
-    width: 50px;
-    height: 50px;
-    margin: 15px -625px;
-}
-
-.btnpandadefuego {
-    width: 50px;
-    height: 50px;
-    margin: 15px 637px;
 }
 
 .balaBambu {
