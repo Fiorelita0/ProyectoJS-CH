@@ -60,7 +60,7 @@ let aparicion = 0;
 
 
 //Boton ingresar para jugar
-modal.onclick = (e) => {
+document.body.onload = (e) => {
 
     e.preventDefault();
     //Comienza a jugar - Generar enemigosHongos
