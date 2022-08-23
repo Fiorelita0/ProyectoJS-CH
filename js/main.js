@@ -1,15 +1,23 @@
-//nombre
+//Nombre
 let nombreUsuario = document.getElementById("usuario");
 let iniciarSesion = document.getElementById("ingreso");
+let aparicion = 0;
+
+//Tiempo
+let contador_seg = 0;
+let contador_min = 0;
+let segundos = document.getElementById('segundos');
+let minutos = document.getElementById('minutos');
 
 //Aparece para ingresar tu nombre con onload
 document.body.onload = function() {
+
     Swal.fire({
         title: "Ingresa tu nombre",
         input: "text",
         inputLabel: "Tu nombre es:",
         showCancelButton: true,
-        confirmButtonText: "Guardar",
+        confirmButtonText: 'Guardar',
         cancelButtonText: "Cancelar",
         inputValidator: (nombre) => {
             if (!nombre) {
@@ -25,6 +33,36 @@ document.body.onload = function() {
             let nombre = resultado.value;
             console.log("Hola, " + nombre);
             nombreUsuario.innerText = nombre;
+
+        }
+        if (resultado.isConfirmed || resultado.isDismissed) {
+            //Comienza a jugar - Generar enemigosHongos
+            setInterval(() => {
+                //Aparicion del hongo
+                aparicion++;
+                if (aparicion % 10 == 0) {
+                    let enemigoHongo = document.createElement("div");
+                    enemigoHongo.classList.add("enemigoHongo");
+                    body.append(enemigoHongo);
+                    enemigoHongo.style.left = Math.random() * window.innerWidth - 100 + "px";
+                    enemigoHongo.style.bottom =
+                        enemigoHongo.getBoundingClientRect().bottom + 250 + "px";
+                }
+            }, 100);
+            //Comienza el tiempo
+            setInterval(() => {
+                if (contador_seg == 59) {
+                    contador_seg = 0;
+                    contador_min++;
+                    minutos.innerHTML = contador_min;
+
+                    if (contador_min == 0) {
+                        contador_min = 0
+                    }
+                }
+                contador_seg++;
+                segundos.innerHTML = contador_seg;
+            }, 1000)
         }
     });
 };
@@ -34,7 +72,7 @@ iniciarSesion.onclick = () => {
     Swal.fire({
         title: 'Login Form',
         html: `<input type="text" id="login" class="swal2-input" placeholder="Username">
-    <input type="password" id="password" class="swal2-input" placeholder="Password"> `,
+    <input type="password" id="password" class="swal2-input" placeholder="Password">`,
         confirmButtonText: 'Sign in',
         focusConfirm: false,
         preConfirm: () => {
@@ -48,36 +86,11 @@ iniciarSesion.onclick = () => {
     }).then((result) => {
         Swal.fire(`
       Login: ${result.value.login}
-      Password: ${result.value.password}
-    `.trim())
+      Password: ${result.value.password}`
+            .trim())
+
     });
 };
-
-//Modal para iniciar sesion y comenzar a jugar
-let modal = document.querySelector(".modal");
-let cerrarModal = document.querySelector(".modal_ingresar");
-let aparicion = 0;
-
-
-//Boton ingresar para jugar
-document.body.onload = (e) => {
-
-    e.preventDefault();
-    //Comienza a jugar - Generar enemigosHongos
-    setInterval(() => {
-        //Aparicion del hongo
-        aparicion++;
-        if (aparicion % 12 == 0) {
-            let enemigoHongo = document.createElement("div");
-            enemigoHongo.classList.add("enemigoHongo");
-            body.append(enemigoHongo);
-            enemigoHongo.style.left = Math.random() * window.innerWidth - 100 + "px";
-            enemigoHongo.style.bottom =
-                enemigoHongo.getBoundingClientRect().bottom + 250 + "px";
-        }
-    }, 200);
-};
-
 //Localstorage
 let btnEliminar = document.getElementById("btnEliminar");
 let btnSesion = document.getElementById("btnSesion");
@@ -170,8 +183,8 @@ class Personajes {
 //Array de los Personajes
 const personaje = [];
 personaje.push(new Personajes("Panda de tierra", 100, 0, 25));
-personaje.push(new Personajes("Panda de agua", 100, 300, 50));
-personaje.push(new Personajes("Panda de fuego", 100, 500, 100));
+personaje.push(new Personajes("Panda de agua", 100, 500, 50));
+personaje.push(new Personajes("Panda de fuego", 100, 1000, 100));
 
 //DOM y Eventos - cambiar fondo
 let fondo = document.querySelector("#fondo");
@@ -203,7 +216,7 @@ fondo.addEventListener("change", () => {
 //Movimiento del disparo
 let bambu = 0;
 let bambu100 = document.getElementById("bambu100");
-let maxPuntaje = 1000;
+let maxPuntaje = 2000;
 
 setInterval(() => {
     let balasBambus = document.querySelectorAll(".balaBambu");
@@ -225,15 +238,15 @@ setInterval(() => {
                     enemigoHongo.getBoundingClientRect().left + 95) {
                     //Desbloqueo de pandas
                     //Al lograr 300 puntos se desbloquea el panda de agua
-                    if (bambu == 300) {
+                    if (bambu == 500) {
                         console.log("Desbloqueo del Panda de agua");
 
                     } //Al lograr 500 puntos se desbloquea el panda de agua
-                    else if (bambu == 500) {
+                    else if (bambu == 1000) {
                         console.log("Desbloqueo del Panda de fuego");
 
                     } //Al lograr 1000 puntos ganas el juego
-                    else if (bambu == 1000) {
+                    else if (bambu == 2000) {
                         console.log("Ganaste");
                     }
                     //Elimina el enemigoHongo al tocar la balaBambu
@@ -267,25 +280,3 @@ setInterval(() => {
         });
     });
 }, 100);
-
-
-//Tiempo
-contador_seg = 0;
-contador_min = 0;
-segundos = document.getElementById('segundos');
-minutos = document.getElementById('minutos');
-
-
-setInterval(() => {
-    if (contador_seg == 59) {
-        contador_seg = 0;
-        contador_min++;
-        minutos.innerHTML = contador_min;
-
-        if (contador_min == 0) {
-            contador_min = 0
-        }
-    }
-    contador_seg++;
-    segundos.innerHTML = contador_seg;
-}, 1000)
