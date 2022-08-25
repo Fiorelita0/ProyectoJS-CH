@@ -337,21 +337,19 @@ setInterval(() => {
                 if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
-                    enemigoHongo.getBoundingClientRect().left + 95 && eleccion == 'tierra') {
-                    let puntos = bambu += 25;
-                    bambu0.innerHTML = puntos;
-                } else if (balaBambu.getBoundingClientRect().left >=
-                    enemigoHongo.getBoundingClientRect().left &&
-                    balaBambu.getBoundingClientRect().left <=
-                    enemigoHongo.getBoundingClientRect().left + 95 && eleccion == 'agua') {
-                    let puntos = bambu += 50;
-                    bambu0.innerHTML = puntos;
-                } else if (balaBambu.getBoundingClientRect().left >=
-                    enemigoHongo.getBoundingClientRect().left &&
-                    balaBambu.getBoundingClientRect().left <=
-                    enemigoHongo.getBoundingClientRect().left + 95 && eleccion == 'fuego') {
-                    let puntos = bambu += 100;
-                    bambu0.innerHTML = puntos;
+                    enemigoHongo.getBoundingClientRect().left + 95) {
+                    if (eleccion == 'tierra') {
+                        let puntos = bambu += 25;
+                        bambu0.innerHTML = puntos;
+                    }
+                    if (eleccion == 'agua') {
+                        let puntos = bambu += 50;
+                        bambu0.innerHTML = puntos;
+                    }
+                    if (eleccion == 'fuego') {
+                        let puntos = bambu += 100;
+                        bambu0.innerHTML = puntos;
+                    }
                 }
             }
         });
