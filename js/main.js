@@ -68,9 +68,6 @@ document.body.onload = function() {
 
                             if (contador_min == 0) {
                                 contador_min = 0;
-                                console.log('ganaste')
-                            } else if (contador_min > 0) {
-                                console.log('perdiste')
                             }
                         }
                         contador_seg++;
@@ -95,9 +92,9 @@ class Personajes {
         this.utilizado = false;
     }
     mensaje() {
-        this.hablar = console.log("Hola me llamo" + this.nombre + "soy un " + this.tipoPanda);
+        this.hablar = console.log("Hola me llamo " + this.nombre + " soy un " + this.tipoPanda);
         Toastify({
-            text: "Hola me llamo" + this.nombre + "soy un " + this.tipoPanda,
+            text: "Hola me llamo " + this.nombre + " soy un " + this.tipoPanda,
             duration: 3000,
             gravity: "top",
             position: "right",
@@ -140,7 +137,7 @@ document.addEventListener("click", () => {
 });
 
 //Vidas del panda
-let vida = 100;
+let vida = 10;
 let vida10 = document.getElementById("vida10");
 
 setInterval(() => {
@@ -246,31 +243,87 @@ setInterval(() => {
                         console.log("Desbloqueo del Panda de fuego");
 
                     } //Al lograr 4000 puntos ganas el juego
-                    /*else if (bambu == maxPuntaje) {
+                    else if (bambu == maxPuntaje) {
                         Swal.fire({
                             position: 'center',
                             title: 'GANASTE',
                             showConfirmButton: true,
-                            imageUrl: 'img/emogi.png',
-                            imageWidth: 200,
-                            imageHeight: 200,
-                            imageAlt: 'Custom image',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire({
-                                    title: 'Querés volver a jugar?',
-                                    showConfirmButton: true,
-                                    confirmButtonText: 'REINICIAR',
-
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload();
-                                    }
-                                })
-                            }
                         })
-                    }*/
-                    //Elimina el enemigoHongo al tocar la balaBambu
+
+                        //Segun el tiempo ganas 3 estrellas si ganaste en el minuto 0
+                        if (contador_min == 0) {
+                            Swal.fire({
+                                position: 'center',
+                                title: 'GANASTE',
+                                showConfirmButton: true,
+                                imageUrl: 'img/star3.png',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        title: 'Querés volver a jugar?',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'REINICIAR',
+
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                }
+                            })
+                        } //Segun el tiempo ganas 2 estrellas si ganaste en el minuto 1
+                        else if (contador_min == 1) {
+                            Swal.fire({
+                                position: 'center',
+                                title: 'GANASTE',
+                                showConfirmButton: true,
+                                imageUrl: 'img/star2.png',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        title: 'Querés volver a jugar?',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'REINICIAR',
+
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                }
+                            })
+                        } //Segun el tiempo ganas 1 estrella si ganaste en el minuto 2
+                        else if (contador_min == 2) {
+                            Swal.fire({
+                                position: 'center',
+                                title: 'GANASTE',
+                                showConfirmButton: true,
+                                imageUrl: 'img/star1.png',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        title: 'Querés volver a jugar?',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'REINICIAR',
+
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    } //Elimina el enemigoHongo al tocar la balaBambu
                     setTimeout(() => {
                         enemigoHongo.remove();
                     }, 50);
