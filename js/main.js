@@ -213,7 +213,7 @@ fondo.addEventListener("change", () => {
 //Movimiento del disparo
 let bambu = 0;
 let bambu0 = document.getElementById("bambu0");
-let maxPuntaje = 50;
+let maxPuntaje = 3900;
 
 setInterval(() => {
     let balasBambus = document.querySelectorAll(".balaBambu");
@@ -243,7 +243,7 @@ setInterval(() => {
                         console.log("Desbloqueo del Panda de fuego");
 
                     } //Al lograr 4000 puntos ganas el juego
-                    else if (bambu == maxPuntaje) {
+                    else if (bambu >= maxPuntaje) {
                         Swal.fire({
                             position: 'center',
                             title: 'GANASTE',
@@ -252,6 +252,7 @@ setInterval(() => {
 
                         //Segun el tiempo ganas 3 estrellas si ganaste en el minuto 0
                         if (contador_min == 0) {
+
                             Swal.fire({
                                 position: 'center',
                                 title: 'GANASTE',
@@ -274,6 +275,7 @@ setInterval(() => {
                                     })
                                 }
                             })
+                            vida10.remove()
                         } //Segun el tiempo ganas 2 estrellas si ganaste en el minuto 1
                         else if (contador_min == 1) {
                             Swal.fire({
@@ -298,8 +300,9 @@ setInterval(() => {
                                     })
                                 }
                             })
+                            vida10.remove()
                         } //Segun el tiempo ganas 1 estrella si ganaste en el minuto 2
-                        else if (contador_min == 2) {
+                        else if (contador_min >= 2) {
                             Swal.fire({
                                 position: 'center',
                                 title: 'GANASTE',
@@ -322,6 +325,7 @@ setInterval(() => {
                                     })
                                 }
                             })
+                            vida10.remove()
                         }
                     } //Elimina el enemigoHongo al tocar la balaBambu
                     setTimeout(() => {
