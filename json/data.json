@@ -1,0 +1,54 @@
+[{
+        "id": 1,
+        "nombre": "Zeus",
+        "especie": "panda",
+        "tipoDeEspecie": "tierra",
+        "bando": "bueno",
+        "ColordeVestimenta": "por defecto",
+        "img": "../img/pandadetierra.png",
+        "vida": 10,
+        "puntosParaDesbloquearlo": 0,
+        "puntosdeDanio": 25,
+        "cantidad": 1,
+        "vivo": true
+    },
+    {
+        "id": 2,
+        "nombre": "Poseidon",
+        "especie": "panda",
+        "tipoDeEspecie": "agua",
+        "bando": "bueno",
+        "ColoDeVestimenta": "celeste",
+        "img": "../img/pandadeagua.png",
+        "vida": 10,
+        "puntosParaDesbloquearlo": 1000,
+        "puntosdeDanio": 50,
+        "cantidad": 1,
+        "vivo": true
+    },
+    {
+        "id": 3,
+        "nombre": "Efesto",
+        "especie": "panda",
+        "tipoDeEspecie": "fuego",
+        "bando": "bueno",
+        "ColoDeVestimenta": "rojo",
+        "img": "../img/pandadefuego.png",
+        "vida": 10,
+        "puntosParaDesbloquearlo": 2000,
+        "puntosdeDanio": 100,
+        "cantidad": 1,
+        "vivo": true
+    },
+    {
+        "id": 4,
+        "nombre": "Ernesto",
+        "especie": "hongo",
+        "tipoDeEspecie": "tierra",
+        "bando": "malo",
+        "ColoDeSombrero": "rojo",
+        "img": "../img/hongoenemigo.png",
+        "vida": 1,
+        "cantidad": 1
+    }
+]

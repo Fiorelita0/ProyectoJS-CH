@@ -1,7 +1,7 @@
 //Nombre
 let nombreUsuario = document.getElementById("usuario");
-let iniciarSesion = document.getElementById("ingreso");
 let aparicion = 0;
+nombreUsuario.innerText = localStorage.getItem('usuarioSwal') || 'Usuario';
 
 //Tiempo
 let contador_seg = 0;
@@ -33,112 +33,94 @@ document.body.onload = function() {
             let nombre = resultado.value;
             console.log("Hola, " + nombre);
             nombreUsuario.innerText = nombre;
-
+            localStorage.setItem('usuarioSwal', nombre);
         }
         if (resultado.isConfirmed || resultado.isDismissed) {
-            //Comienza a jugar - Generar enemigosHongos
-            setInterval(() => {
-                //Aparicion del hongo
-                aparicion++;
-                if (aparicion % 10 == 0) {
-                    let enemigoHongo = document.createElement("div");
-                    enemigoHongo.classList.add("enemigoHongo");
-                    body.append(enemigoHongo);
-                    enemigoHongo.style.left = Math.random() * window.innerWidth - 100 + "px";
-                    enemigoHongo.style.bottom =
-                        enemigoHongo.getBoundingClientRect().bottom + 250 + "px";
-                }
-            }, 100);
-            //Comienza el tiempo
-            setInterval(() => {
-                if (contador_seg == 59) {
-                    contador_seg = 0;
-                    contador_min++;
-                    minutos.innerHTML = contador_min;
 
-                    if (contador_min == 0) {
-                        contador_min = 0
-                    }
+            Swal.fire({
+                title: 'Comenzará el juego!',
+                text: 'Presiona OK para comenzar',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    //Comienza a jugar - Generar enemigosHongos
+                    setInterval(() => {
+                        //Aparicion del hongo
+                        aparicion++;
+                        if (aparicion % 12 == 0) {
+                            let enemigoHongo = document.createElement("div");
+                            enemigoHongo.classList.add("enemigoHongo");
+                            body.append(enemigoHongo);
+                            enemigoHongo.style.left = Math.random() * window.innerWidth - 100 + "px";
+                            enemigoHongo.style.bottom = enemigoHongo.getBoundingClientRect().bottom + 250 + "px";
+                        }
+                    }, 70);
+
+                    //Comienza el tiempo
+                    setInterval(() => {
+                        if (contador_seg == 59) {
+                            contador_seg = 0;
+                            contador_min++;
+                            minutos.innerHTML = contador_min;
+
+                            if (contador_min == 0) {
+                                contador_min = 0;
+                                console.log('ganaste')
+                            } else if (contador_min > 0) {
+                                console.log('perdiste')
+                            }
+                        }
+                        contador_seg++;
+                        segundos.innerHTML = contador_seg;
+                    }, 1000)
                 }
-                contador_seg++;
-                segundos.innerHTML = contador_seg;
-            }, 1000)
+            })
         }
     });
 };
 
-//Iniciar sesion con email y contraseña
-iniciarSesion.onclick = () => {
-    Swal.fire({
-        title: 'Login Form',
-        html: `<input type="text" id="login" class="swal2-input" placeholder="Username">
-    <input type="password" id="password" class="swal2-input" placeholder="Password">`,
-        confirmButtonText: 'Sign in',
-        focusConfirm: false,
-        preConfirm: () => {
-            const login = Swal.getPopup().querySelector('#login').value
-            const password = Swal.getPopup().querySelector('#password').value
-            if (!login || !password) {
-                Swal.showValidationMessage(`Please enter login and password`)
-            }
-            return { login: login, password: password }
-        }
-    }).then((result) => {
-        Swal.fire(`
-      Login: ${result.value.login}
-      Password: ${result.value.password}`
-            .trim())
-
-    });
-};
-//Localstorage
-let btnEliminar = document.getElementById("btnEliminar");
-let btnSesion = document.getElementById("btnSesion");
-let chkRecordar = document.getElementById("recordar");
-
-function guardarDatos(storage) {
-    let emailUsuario = document.getElementById("email").value;
-    let contrasenia = document.getElementById("contrasenia").value;
-
-    const usuario = {
-        emailUsuario: emailUsuario,
-        contrasenia: contrasenia,
-    };
-    storage.setItem("usuario", JSON.stringify(usuario));
-}
-btnSesion.addEventListener("click", () => {
-    if (chkRecordar.checked) {
-        guardarDatos(localStorage);
+//Funcion constructora
+//Objetos
+class Personajes {
+    constructor(nombre, tipo, vida, puntos, danio, imagen) {
+        this.nombre = nombre.toUpperCase();
+        this.tipoPanda = tipo;
+        this.vida = vida;
+        this.puntosObtenidos = puntos;
+        this.puntosDanio = danio;
+        this.imagen = imagen
+        this.utilizado = false;
     }
-});
-
-function borrarTodosDatos(storage) {
-    storage.clear();
+    mensaje() {
+        this.hablar = console.log("Hola me llamo" + this.nombre + "soy un " + this.tipoPanda);
+        Toastify({
+            text: "Hola me llamo" + this.nombre + "soy un " + this.tipoPanda,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            style: {
+                background: "linear-gradient(to right,#0ac6ff,#f51212 )",
+                width: '10vw',
+                height: 80
+            },
+            offset: {
+                x: 20,
+                y: 60,
+            },
+        }).showToast();
+    }
+    utilizar() {
+        this.utilizado = true;
+    }
 }
-btnEliminar.onclick = () => {
-    borrarTodosDatos(localStorage);
-};
-
-//Vidas del panda
-let vida = 100;
-let vida100 = document.getElementById("vida100");
-
-setInterval(() => {
-    let enemigosHongos = document.querySelectorAll(".enemigoHongo");
-    enemigosHongos.forEach((enemigoHongo) => {
-        //getBoundingClientRect lo saque de un tutorial para poder realizar movimiento, trata de devolver un elemento con su posicion en tiempo real en la pantalla
-        enemigoHongo.style.top =
-            enemigoHongo.getBoundingClientRect().top + 10 + "px";
-
-        //Desaparicion del hongo y eliminacion de una vida
-        if (enemigoHongo.getBoundingClientRect().top >
-            pandaPersonaje.getBoundingClientRect().top - 25) {
-            vida -= 25;
-            vida100.innerHTML = vida;
-            enemigoHongo.remove();
-        }
-    });
-}, 100);
+//Array de los Personajes
+const personaje = [];
+personaje.push(new Personajes("Zeus", "panda de tierra", 10, 0, 25, "img/pandadetierra.png"));
+personaje.push(new Personajes("Poseidon", "panda de agua", 10, 1000, 50, "img/pandadeagua.png"));
+personaje.push(new Personajes("Efesto", "panda de fuego", 10, 2000, 100, "img/pandadefuego.png"));
 
 //Movimiento con mouse del Panda
 let pandaPersonaje = document.querySelector(".pandaPersonaje");
@@ -157,34 +139,52 @@ document.addEventListener("click", () => {
     body.append(balaBambu);
 });
 
-//Crear array de las imagenes del panda
-const arrayPandas = new Array();
-arrayPandas[0] = "img/pandadetierra.png";
-arrayPandas[1] = "img/pandadeagua.png";
-arrayPandas[2] = "img/pandadefuego.png";
+//Vidas del panda
+let vida = 100;
+let vida10 = document.getElementById("vida10");
 
-//Funcion constructora
-//Objetos
-class Personajes {
-    constructor(nombre, vida, puntos, danio) {
-        this.nombre = nombre.toUpperCase();
-        this.vida = vida;
-        this.puntosObtenidos = puntos;
-        this.puntosDanio = danio;
-        this.utilizado = false;
-    }
-    mensaje() {
-        this.hablar = console.log("Hola soy un " + this.nombre);
-    }
-    utilizar() {
-        this.utilizado = true;
-    }
-}
-//Array de los Personajes
-const personaje = [];
-personaje.push(new Personajes("Panda de tierra", 100, 0, 25));
-personaje.push(new Personajes("Panda de agua", 100, 500, 50));
-personaje.push(new Personajes("Panda de fuego", 100, 1000, 100));
+setInterval(() => {
+    let enemigosHongos = document.querySelectorAll(".enemigoHongo");
+    enemigosHongos.forEach((enemigoHongo) => {
+        //getBoundingClientRect lo saque de un tutorial para poder realizar movimiento, trata de devolver un elemento con su posicion en tiempo real en la pantalla
+        enemigoHongo.style.top =
+            enemigoHongo.getBoundingClientRect().top + 10 + "px";
+
+        //Desaparicion del hongo y eliminacion de una vida
+        if (enemigoHongo.getBoundingClientRect().top >
+            pandaPersonaje.getBoundingClientRect().top - 25) {
+            vida--;
+            vida10.innerHTML = vida;
+            enemigoHongo.remove();
+            if (vida == 0) {
+                vida10.remove()
+                Swal.fire({
+                    position: 'center',
+                    title: 'OOPS..PERDISTE!',
+                    showConfirmButton: true,
+                    imageUrl: 'img/emogi.png',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Querés volver a jugar?',
+                            showConfirmButton: true,
+                            confirmButtonText: 'REINICIAR',
+
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    }
+                })
+            }
+        }
+    });
+}, 100);
+
 
 //DOM y Eventos - cambiar fondo
 let fondo = document.querySelector("#fondo");
@@ -194,7 +194,7 @@ let urlPersonaje = "";
 fondo.addEventListener("change", () => {
     console.log(fondo.value);
     document.body.style.backgroundImage = `url('img/fondode${fondo.value}.webp')`;
-    urlPersonaje = arrayPandas[fondo.selectedIndex];
+    urlPersonaje = personaje[fondo.selectedIndex].imagen;
     document.querySelector('.pandaPersonaje').style.backgroundImage = `url('${urlPersonaje}')`;
 
     let eleccion = fondo.value;
@@ -215,8 +215,8 @@ fondo.addEventListener("change", () => {
 
 //Movimiento del disparo
 let bambu = 0;
-let bambu100 = document.getElementById("bambu100");
-let maxPuntaje = 2000;
+let bambu0 = document.getElementById("bambu0");
+let maxPuntaje = 50;
 
 setInterval(() => {
     let balasBambus = document.querySelectorAll(".balaBambu");
@@ -237,46 +237,66 @@ setInterval(() => {
                     balaBambu.getBoundingClientRect().left <=
                     enemigoHongo.getBoundingClientRect().left + 95) {
                     //Desbloqueo de pandas
-                    //Al lograr 300 puntos se desbloquea el panda de agua
-                    if (bambu == 500) {
+                    //Al lograr 1000 puntos se desbloquea el panda de agua
+                    if (bambu == 1000) {
                         console.log("Desbloqueo del Panda de agua");
 
-                    } //Al lograr 500 puntos se desbloquea el panda de agua
-                    else if (bambu == 1000) {
+                    } //Al lograr 2000 puntos se desbloquea el panda de agua
+                    else if (bambu == 2000) {
                         console.log("Desbloqueo del Panda de fuego");
 
-                    } //Al lograr 1000 puntos ganas el juego
-                    else if (bambu == 2000) {
-                        console.log("Ganaste");
-                    }
+                    } //Al lograr 4000 puntos ganas el juego
+                    /*else if (bambu == maxPuntaje) {
+                        Swal.fire({
+                            position: 'center',
+                            title: 'GANASTE',
+                            showConfirmButton: true,
+                            imageUrl: 'img/emogi.png',
+                            imageWidth: 200,
+                            imageHeight: 200,
+                            imageAlt: 'Custom image',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    title: 'Querés volver a jugar?',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'REINICIAR',
+
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                })
+                            }
+                        })
+                    }*/
                     //Elimina el enemigoHongo al tocar la balaBambu
                     setTimeout(() => {
                         enemigoHongo.remove();
                     }, 50);
                 }
-                //Chocar con el enemigo segun el fondo obtiene más puntos
+                //Choca con el enemigo segun el fondo obtiene más puntos
                 let eleccion = fondo.value;
                 if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
                     enemigoHongo.getBoundingClientRect().left + 95 && eleccion == 'tierra') {
                     let puntos = bambu += 25;
-                    bambu100.innerHTML = puntos;
+                    bambu0.innerHTML = puntos;
                 } else if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
                     enemigoHongo.getBoundingClientRect().left + 95 && eleccion == 'agua') {
                     let puntos = bambu += 50;
-                    bambu100.innerHTML = puntos;
+                    bambu0.innerHTML = puntos;
                 } else if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
                     enemigoHongo.getBoundingClientRect().left + 95 && eleccion == 'fuego') {
                     let puntos = bambu += 100;
-                    bambu100.innerHTML = puntos;
+                    bambu0.innerHTML = puntos;
                 }
             }
-
         });
     });
 }, 100);
