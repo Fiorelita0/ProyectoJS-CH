@@ -4,17 +4,17 @@
         "especie": "panda",
         "tipoDeEspecie": "tierra",
         "bando": "bueno",
-        "ColordeVestimenta": "por defecto",
+        "ColorDeVestimenta": "por defecto",
         "img": "../img/pandadetierra.png",
         "vida": 10,
         "puntosParaDesbloquearlo": 0,
-        "puntosdeDanio": 25,
+        "puntosDeDanio": 25,
         "cantidad": 1,
         "vivo": true
     },
     {
         "id": 2,
-        "nombre": "Poseidon",
+        "nombre": "Afrodita",
         "especie": "panda",
         "tipoDeEspecie": "agua",
         "bando": "bueno",
@@ -22,7 +22,7 @@
         "img": "../img/pandadeagua.png",
         "vida": 10,
         "puntosParaDesbloquearlo": 1000,
-        "puntosdeDanio": 50,
+        "puntosDeDanio": 50,
         "cantidad": 1,
         "vivo": true
     },
@@ -36,7 +36,7 @@
         "img": "../img/pandadefuego.png",
         "vida": 10,
         "puntosParaDesbloquearlo": 2000,
-        "puntosdeDanio": 100,
+        "puntosDeDanio": 100,
         "cantidad": 1,
         "vivo": true
     },
@@ -46,8 +46,10 @@
         "especie": "hongo",
         "tipoDeEspecie": "tierra",
         "bando": "malo",
-        "ColoDeSombrero": "rojo",
+        "ColoDeVestimenta": "rojo",
         "img": "../img/hongoenemigo.png",
+        "puntosParaDesbloquearlo": "solo los pandas pueden transformarse",
+        "puntosDeDanio": "no tiene puntos de daño",
         "vida": 1,
         "cantidad": 1
     }

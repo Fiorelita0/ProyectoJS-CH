@@ -54,7 +54,7 @@ document.body.onload = function() {
                             let enemigoHongo = document.createElement("div");
                             enemigoHongo.classList.add("enemigoHongo");
                             body.append(enemigoHongo);
-                            enemigoHongo.style.left = Math.random() * window.innerWidth - 100 + "px";
+                            enemigoHongo.style.left = Math.random() * window.innerWidth - 10 + "px";
                             enemigoHongo.style.bottom = enemigoHongo.getBoundingClientRect().bottom + 250 + "px";
                         }
                     }, 70);
@@ -82,13 +82,14 @@ document.body.onload = function() {
 //Funcion constructora
 //Objetos
 class Personajes {
-    constructor(nombre, tipo, vida, puntos, danio, imagen) {
+    constructor(nombre, tipo, vida, puntos, danio, imagen, fondo) {
         this.nombre = nombre.toUpperCase();
         this.tipoPanda = tipo;
         this.vida = vida;
         this.puntosObtenidos = puntos;
         this.puntosDanio = danio;
-        this.imagen = imagen
+        this.imagen = imagen;
+        this.fondo = fondo;
         this.utilizado = false;
     }
     mensaje() {
@@ -115,9 +116,9 @@ class Personajes {
 }
 //Array de los Personajes
 const personaje = [];
-personaje.push(new Personajes("Zeus", "panda de tierra", 10, 0, 25, "img/pandadetierra.png"));
-personaje.push(new Personajes("Poseidon", "panda de agua", 10, 1000, 50, "img/pandadeagua.png"));
-personaje.push(new Personajes("Efesto", "panda de fuego", 10, 2000, 100, "img/pandadefuego.png"));
+personaje.push(new Personajes("Zeus", "panda de tierra", 10, 0, 25, "img/pandadetierra.png", 'img/fondodetierra.webp'));
+personaje.push(new Personajes("Poseidon", "panda de agua", 10, 1000, 50, "img/pandadeagua.png", 'img/fondodeagua.webp'));
+personaje.push(new Personajes("Efesto", "panda de fuego", 10, 2000, 100, "img/pandadefuego.png", 'img/fondodefuego.webp'));
 
 //Movimiento con mouse del Panda
 let pandaPersonaje = document.querySelector(".pandaPersonaje");
@@ -177,6 +178,8 @@ setInterval(() => {
                         })
                     }
                 })
+                vida10.remove();
+                bambu0.remove()
             }
         }
     });
@@ -184,7 +187,7 @@ setInterval(() => {
 
 
 //DOM y Eventos - cambiar fondo
-let fondo = document.querySelector("#fondo");
+/*let fondo = document.querySelector("#fondo");
 let urlPersonaje = "";
 
 
@@ -208,9 +211,11 @@ fondo.addEventListener("change", () => {
         personaje[2].mensaje();
         personaje[2].utilizar();
     }
-});
+});*/
 
 //Movimiento del disparo
+let urlFondo = ""
+let urlPersonaje = "";
 let bambu = 0;
 let bambu0 = document.getElementById("bambu0");
 let maxPuntaje = 3900;
@@ -229,18 +234,46 @@ setInterval(() => {
             if (balaBambu.getBoundingClientRect().top <=
                 enemigoHongo.getBoundingClientRect().top + 50) {
                 //Choca con el enemigo 
+
                 if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
                     enemigoHongo.getBoundingClientRect().left + 95) {
-                    //Desbloqueo de pandas
-                    //Al lograr 1000 puntos se desbloquea el panda de agua
-                    if (bambu == 1000) {
-                        console.log("Desbloqueo del Panda de agua");
 
-                    } //Al lograr 2000 puntos se desbloquea el panda de agua
-                    else if (bambu == 2000) {
+                    //Desbloqueo de pandas
+
+                    if (bambu == 0) {
+                        console.log(personaje[0]);
+                        personaje[0].mensaje();
+                        personaje[0].utilizar();
+                        console.log("Desbloqueo del Panda de tierra");
+                        urlFondo = personaje[0].fondo;
+                        urlPersonaje = personaje[0].imagen;
+                        document.body.style.backgroundImage = `url('${urlFondo}')`;
+                        document.querySelector('.pandaPersonaje').style.backgroundImage = `url('${urlPersonaje}')`;
+
+                    } //Al lograr 1000 puntos se desbloquea el panda de agua
+                    else if (bambu == 125) {
+                        console.log(personaje[1]);
+                        personaje[1].mensaje();
+                        personaje[1].utilizar();
+                        console.log("Desbloqueo del Panda de agua");
+                        urlFondo = personaje[1].fondo;
+                        urlPersonaje = personaje[1].imagen;
+                        document.body.style.backgroundImage = `url('${urlFondo}')`;
+                        document.querySelector('.pandaPersonaje').style.backgroundImage = `url('${urlPersonaje}')`;
+
+
+                    } //Al lograr 2000 puntos se desbloquea el panda de fuego
+                    else if (bambu == 175) {
+                        console.log(personaje[2]);
+                        personaje[2].mensaje();
+                        personaje[2].utilizar();
                         console.log("Desbloqueo del Panda de fuego");
+                        urlFondo = personaje[2].fondo;
+                        urlPersonaje = personaje[2].imagen;
+                        document.body.style.backgroundImage = `url('${urlFondo}')`;
+                        document.querySelector('.pandaPersonaje').style.backgroundImage = `url('${urlPersonaje}')`;
 
                     } //Al lograr 4000 puntos ganas el juego
                     else if (bambu >= maxPuntaje) {
@@ -275,7 +308,8 @@ setInterval(() => {
                                     })
                                 }
                             })
-                            vida10.remove()
+                            vida10.remove();
+                            bambu0.remove()
                         } //Segun el tiempo ganas 2 estrellas si ganaste en el minuto 1
                         else if (contador_min == 1) {
                             Swal.fire({
@@ -300,7 +334,8 @@ setInterval(() => {
                                     })
                                 }
                             })
-                            vida10.remove()
+                            vida10.remove();
+                            bambu0.remove()
                         } //Segun el tiempo ganas 1 estrella si ganaste en el minuto 2
                         else if (contador_min >= 2) {
                             Swal.fire({
@@ -325,19 +360,31 @@ setInterval(() => {
                                     })
                                 }
                             })
-                            vida10.remove()
+                            vida10.remove();
+                            bambu0.remove()
                         }
-                    } //Elimina el enemigoHongo al tocar la balaBambu
+                    }
+                    //Elimina el enemigoHongo al tocar la balaBambu
                     setTimeout(() => {
                         enemigoHongo.remove();
                     }, 50);
-                }
-                //Choca con el enemigo segun el fondo obtiene más puntos
-                let eleccion = fondo.value;
-                if (balaBambu.getBoundingClientRect().left >=
+
+                    if (urlFondo = personaje[0]) {
+                        let puntos = bambu += 25;
+                        bambu0.innerHTML = puntos;
+                    } else if (urlFondo = personaje[1]) {
+                        let puntos = bambu += 50;
+                        bambu0.innerHTML = puntos;
+                    } else if (urlFondo = personaje[2]) {
+                        let puntos = bambu += 100;
+                        bambu0.innerHTML = puntos;
+                    }
+                } //Choca con el enemigo segun el fondo obtiene más puntos
+                /*else if (balaBambu.getBoundingClientRect().left >=
                     enemigoHongo.getBoundingClientRect().left &&
                     balaBambu.getBoundingClientRect().left <=
                     enemigoHongo.getBoundingClientRect().left + 95) {
+                    let eleccion = fondo.value;
                     if (eleccion == 'tierra') {
                         let puntos = bambu += 25;
                         bambu0.innerHTML = puntos;
@@ -350,7 +397,7 @@ setInterval(() => {
                         let puntos = bambu += 100;
                         bambu0.innerHTML = puntos;
                     }
-                }
+                }*/
             }
         });
     });

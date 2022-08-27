@@ -35,6 +35,10 @@ function crearHTML(array) {
                     <div class="carta-body">
                         <h5 class="carta-titulo">${personaje.nombre}</h5>
                         <p class="carta-texto">Especie: ${personaje.especie}</p>
+                        <p class="carta-texto">Tipo de especie: ${personaje.tipoDeEspecie}</p>
+                        <p class="carta-texto">Bando: ${personaje.bando}</p>
+                        <p class="carta-texto">Puntos para desbloquearlo: ${personaje?.puntosParaDesbloquearlo}</p>
+                        <p class="carta-texto">Puntos de daño: ${personaje?.puntosDeDanio}</p>
                     </div>
                 </div>
             </div>`
