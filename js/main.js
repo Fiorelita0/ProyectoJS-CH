@@ -143,7 +143,7 @@ document.addEventListener("mousemove", (event) => {
 });
 
 //Generar disparo del Panda
-document.addEventListener("keydown", () => {
+document.addEventListener("keyup", () => {
     let balaBambu = document.createElement("div");
     balaBambu.classList.add("balaBambu");
     balaBambu.style.bottom = 44 + "px";
