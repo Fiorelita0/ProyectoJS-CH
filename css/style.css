@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DynaPuff&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff&family=Merriweather:ital@1&family=Signika+Negative:wght@300&family=Ubuntu:wght@500&display=swap');
 * {
     padding: 0;
     margin: 0;
@@ -6,7 +6,7 @@
 
 .bodyindex {
     background-image: url('../img/fondodetierra.webp');
-    background-size: 100% 660px;
+    background-size: 100% 665px;
     background-repeat: no-repeat;
     overflow-x: hidden;
 }
@@ -48,7 +48,7 @@
     padding: 10px 0 0 95px;
 }
 
-#vida10 {
+#vida20 {
     padding: 18px 15px;
     font-size: 2.3rem;
     color: black;
@@ -131,4 +131,93 @@
     width: 50px;
     height: 50px;
     padding: 15px 0 0 26px;
+}
+
+.ingreso-usuario {
+    width: 50px;
+    height: 50px;
+    padding: 15px 0 0 20px;
+}
+
+.high-score {
+    width: 50px;
+    height: 50px;
+    padding: 15px 0 0 20px;
+}
+
+#puntos {
+    padding: 18px 5px;
+    font-size: 2.3rem;
+    color: black;
+    position: absolute;
+}
+
+
+/*Personajes html*/
+
+.personajes-container {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.carta {
+    width: 300px;
+    border: 2px solid black;
+    height: 100px;
+    padding: 5px 0px 0px 18px;
+    margin: 10px 60px 0px 110px;
+}
+
+.carta-top {
+    width: 259px;
+    height: 217px;
+}
+
+.carta-titulo {
+    display: flex;
+    justify-content: center;
+}
+
+
+/*Informacion*/
+
+h4 {
+    font-family: 'DynaPuff', cursive;
+    padding: 12px 0px;
+}
+
+h5 {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.35rem;
+    padding: 15px 0px;
+}
+
+p {
+    font-family: 'Merriweather', serif;
+    font-size: 1.15rem;
+    padding: 10px 50px;
+}
+
+.info-mouse {
+    width: 12%;
+    height: 6%;
+}
+
+.info-teclado {
+    width: 30%;
+    height: 5%;
+}
+
+.info-hongobambu {
+    width: 27%;
+    height: 6%;
+}
+
+#info-principal {
+    padding: 5px 0px 5px 40px;
 }
